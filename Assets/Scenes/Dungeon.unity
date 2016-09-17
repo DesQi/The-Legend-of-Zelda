@@ -381,9 +381,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 596966363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cb6586f6e8994abdb7ad49f85c053b9, type: 3}
+  m_Script: {fileID: 11500000, guid: c98af6734453f4879aae95f490063444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rupee_text: {fileID: 1545126071}
 --- !u!1 &664993218
 GameObject:
   m_ObjectHideFlags: 0
