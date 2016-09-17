@@ -252,6 +252,17 @@ public class StateLinkAttack: State {
 	}
 }
 
+// When CameraMove, Player does not move
+//public class KeepLinkPositionWhenCameraMove : State {
+//	PlayerControl pc;
+//	public KeepLinkPositionWhenCameraMove(PlayerControl pc) {
+//		this.pc = pc;
+//	}
+//	public override void OnStart () {
+//		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
+//	}
+//}
+
 // Additional recommended states:
 // StateDeath
 // StateDamaged
