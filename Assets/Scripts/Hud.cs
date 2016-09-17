@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Hud : MonoBehaviour {
 
+	// Rupee_text
 	public Text rupee_text;
 
 	// Use this for initialization
