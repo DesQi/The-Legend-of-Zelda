@@ -4,10 +4,15 @@ using System.Collections;
 public class player_control : MonoBehaviour {
 
 	public float walking_volocity = 1.0f;
+	public int ruppe_count = 0;
+
+	public static player_control instance;
 
 	// Use this for initialization
 	void Start () {
-	
+		if (instance != null)
+			Debug.LogError ("Multiple Link objects detected!");
+		instance = this;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +27,11 @@ public class player_control : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider coll) {
-		print (coll.gameObject.name);
+		if (coll.gameObject.tag == "Rupee") {
+			Destroy (coll.gameObject);
+			ruppe_count++;
+		} else if (coll.gameObject.tag == "Heart") {
+			// haha
+		}
 	}
 }
