@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System;
 
 // State Machines are responsible for processing states, notifying them when they're about to begin or conclude, etc.
 public class StateMachine
@@ -175,15 +177,57 @@ public class StateLinkNormalMovement: State {
 		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (horizontal_input, vertical_input, 0) 
 			* pc.walking_volocity * time_delta_fraction;
 
-		// Decide current direction
-		if (horizontal_input > 0.0f)
+		// Grid based movement & Decide current direction
+		// Use offset to reset link's pos in grid before movement
+		Vector3 pos = pc.transform.position;
+		float x_offset = pos.x % 0.5f;
+		float y_offset = pos.y % 0.5f;
+		if (horizontal_input > 0.0f) {
+			double pos_delta = pos.y - Math.Truncate (pos.y);
+			if (pc.current_direction == Direction.NORTH || pc.current_direction == Direction.SOUTH) {
+				if (pos_delta > 0.50f && pos_delta < 0.75f || pos_delta > 0f && pos_delta < 0.25f) {
+					pos.y -= y_offset;
+				} else {
+					pos.y += (0.50f - y_offset);
+				}
+			}
+			pc.transform.position = pos;
 			pc.current_direction = Direction.EAST;
-		else if (horizontal_input < 0.0f)
+
+		} else if (horizontal_input < 0.0f) {
+			double pos_delta = pos.y - Math.Truncate (pos.y);
+			if (pc.current_direction == Direction.NORTH || pc.current_direction == Direction.SOUTH) {
+				if (pos_delta > 0.50f && pos_delta < 0.75f || pos_delta > 0f && pos_delta < 0.25f) {
+					pos.y -= y_offset;
+				} else {
+					pos.y += (0.50f - y_offset);
+				}
+			}
+			pc.transform.position = pos;
 			pc.current_direction = Direction.WEST;
-		else if (vertical_input > 0.0f)
+		} else if (vertical_input > 0.0f) {
+			double pos_delta = pos.x - Math.Truncate (pos.x);
+			if (pc.current_direction == Direction.EAST || pc.current_direction == Direction.WEST) {
+				if (pos_delta > 0.50f && pos_delta < 0.75f || pos_delta > 0f && pos_delta < 0.25f) {
+					pos.x -= x_offset;
+				} else {
+					pos.x += (0.50f - x_offset);
+				}
+			}
+			pc.transform.position = pos;
 			pc.current_direction = Direction.NORTH;
-		else if (vertical_input < 0.0f)
+		} else if (vertical_input < 0.0f) {
+			double pos_delta = pos.x - Math.Truncate (pos.x);
+			if (pc.current_direction == Direction.EAST || pc.current_direction == Direction.WEST) {
+				if (pos_delta > 0.50f && pos_delta < 0.75f || pos_delta > 0f && pos_delta < 0.25f) {
+					pos.x -= x_offset;
+				} else {
+					pos.x += (0.50f - x_offset);
+				}
+			}
+			pc.transform.position = pos;
 			pc.current_direction = Direction.SOUTH;
+		}
 
 		if (Input.GetKeyDown (KeyCode.Z))
 			state_machine.ChangeState (new StateLinkAttack (pc, pc.selected_weapon_prefab, 15));
