@@ -158,11 +158,21 @@ public class StatePlayAnimationForHeldKey : State
 	}
 }
 
+public class StateLinkNormalMovement : State {
+	PlayerControl pc;
+	public StateLinkNormalMovement(PlayerControl pc) {
+		this.pc = pc;
+	}
+	public override void OnUpdate(float time_delta_fraction) {
+		// tutorial
+	}
+}
+
 // Additional recommended states:
-// StateDeath
-// StateDamaged
-// StateWeaponSwing
-// StateVictory
+// StateDeath - link died, based on time to revive
+// StateDamaged - link damaged, flash colors and back to original
+// StateWeaponSwing - link change sprite to decide what to do
+// StateVictory -  when victory
 
 // Additional control states:
 // LinkNormalMovement.

@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 using System.Collections;
 
 public class Tile : MonoBehaviour {
@@ -69,6 +69,8 @@ public class Tile : MonoBehaviour {
             bc.center = Vector3.zero;
             bc.size = Vector3.one;
             break;
+		case 'P': // Pushable?
+			break;
         default:
             bc.enabled = false;
             break;
