@@ -7,7 +7,7 @@ public enum EntityState {NORMAL, ATTACKING};
 public class PlayerControl : MonoBehaviour {
 
 	public float walking_volocity = 1.0f;
-	public int ruppe_count = 0;
+	public int rupee_count = 0;
 
 	public static PlayerControl instance;
 
@@ -55,7 +55,7 @@ public class PlayerControl : MonoBehaviour {
 	void OnTriggerEnter(Collider coll) {
 		if (coll.gameObject.tag == "Rupee") {
 			Destroy (coll.gameObject);
-			ruppe_count++;
+			rupee_count++;
 		} else if (coll.gameObject.tag == "Heart") {
 			// haha
 		}
