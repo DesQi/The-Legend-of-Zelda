@@ -6,12 +6,9 @@ public enum EntityState {NORMAL, ATTACKING};
 
 public class PlayerControl : MonoBehaviour {
 
-	// public hero_variables
-	public float walking_velocity = 1.0f;
-	public int rupee_count = 0;
-	public float heart_count = 3.0f;
+	public float walking_volocity = 1.0f;
+	public int ruppe_count = 0;
 
-	// instance
 	public static PlayerControl instance;
 
 	public Sprite[] link_run_down;
@@ -29,32 +26,38 @@ public class PlayerControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Application.targetFrameRate = 60;
+
 		if (instance != null)
-			Debug.LogError("Multiple link objects detected!"); 
+			Debug.LogError ("Multiple Link objects detected!");
 		instance = this;
-		animation_state_machine = new StateMachine();
-		animation_state_machine.ChangeState(new StateIdleWithSprite(this,GetComponent<SpriteRenderer>(), link_run_down[0]));
+
+		animation_state_machine = new StateMachine ();
+		animation_state_machine.ChangeState (new StateIdleWithSprite (this, GetComponent<SpriteRenderer> (), link_run_down [0]));
+
+		control_state_machine = new StateMachine ();
+		control_state_machine.ChangeState (new StateLinkNormalMovement (this));
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		// Update the animation state machine
 		animation_state_machine.Update ();
 
-		float horizontal_input = Input.GetAxis ("Horizontal");
-		float vertical_input = Input.GetAxis ("Vertical");
+		//Update the movement state machine
+		// If this state machine is ever "idle", we give it a standard movement state
+		control_state_machine.Update();
+		if (control_state_machine.IsFinished ())
+			control_state_machine.ChangeState (new StateLinkNormalMovement (this));
 
-		if (horizontal_input != 0.0f)
-			vertical_input = 0.0f;
-
-		GetComponent<Rigidbody> ().velocity = new Vector3 (horizontal_input, vertical_input, 0) * walking_velocity;
 	}
 
 	void OnTriggerEnter(Collider coll) {
 		if (coll.gameObject.tag == "Rupee") {
-			rupee_count++;
 			Destroy (coll.gameObject);
+			ruppe_count++;
 		} else if (coll.gameObject.tag == "Heart") {
-			//DO Heart Action	
+			// haha
 		}
 	}
 }
