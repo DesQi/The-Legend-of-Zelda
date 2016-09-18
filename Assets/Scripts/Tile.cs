@@ -71,6 +71,11 @@ public class Tile : MonoBehaviour {
             break;
 		case 'P': // Pushable?
 			break;
+		case 'W': // ThroughWall, Up,Down,Right,Left: 91,10,49,50
+			bc.center = Vector3.zero;
+			bc.center = Vector3.one;
+			bc.enabled = false;
+			break;
         default:
             bc.enabled = false;
             break;

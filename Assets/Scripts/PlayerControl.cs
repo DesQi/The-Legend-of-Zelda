@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour {
 			Debug.LogError ("Multiple Link objects detected!");
 		instance = this;
 
+		this.transform.position = new Vector3 (39.5f, 2.0f, 0);
+
 		animation_state_machine = new StateMachine ();
 		animation_state_machine.ChangeState (new StateIdleWithSprite (this, GetComponent<SpriteRenderer> (), link_run_down [0]));
 
@@ -58,6 +60,9 @@ public class PlayerControl : MonoBehaviour {
 			rupee_count++;
 		} else if (coll.gameObject.tag == "Heart") {
 			// haha
-		}
+		} else if (coll.gameObject.tag == "Door") {
+			// haha
+			control_state_machine.ChangeState (new StateLinkTriggerDoor (this));
+		} 
 	}
 }
