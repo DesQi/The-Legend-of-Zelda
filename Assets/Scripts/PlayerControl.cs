@@ -61,6 +61,12 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider coll) {
+		// If trigger with enemy
+		if (coll.gameObject.tag == "Stalfos") {
+			Debug.Log ("stalfos");
+			control_state_machine.ChangeState (new StateLinkDamaged (this));
+		}
+
 		if (coll.gameObject.tag == "Rupee") {
 			Destroy (coll.gameObject);
 			rupee_count++;
@@ -83,4 +89,5 @@ public class PlayerControl : MonoBehaviour {
 			control_state_machine.ChangeState (new StateLinkTriggerDoor (this));
 		} 
 	}
+		
 }

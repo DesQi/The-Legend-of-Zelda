@@ -307,10 +307,6 @@ public class StateLinkTriggerDoor : State {
 	public StateLinkTriggerDoor(PlayerControl pc) {
 		this.pc = pc;
 	}
-	public override void OnStart () {
-//		state_machine.ChangeState (new StateLinkNormalMovement (pc));
-//		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
-	}
 		
 	public override void OnUpdate(float time_delta_fraction) {
 		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
@@ -332,6 +328,41 @@ public class StateLinkTriggerDoor : State {
 			}
 			ConcludeState ();
 		}
+	}
+
+}
+
+
+// When CameraMove, Player does not move
+public class StateLinkDamaged : State {
+	PlayerControl pc;
+
+	public int knockdown_times = 10;
+	public float knockdown_velocity = 1.3f;
+
+	public StateLinkDamaged(PlayerControl pc) {
+		this.pc = pc;
+	}
+
+	public override void OnUpdate(float time_delta_fraction) {
+		float horizontal_input =  0.0f;
+		float vertical_input =  0.0f;
+		if (knockdown_times > 0) {
+			knockdown_times--;
+			if (pc.current_direction == Direction.WEST) {
+				horizontal_input = knockdown_velocity;
+			} else if (pc.current_direction == Direction.EAST) {
+				horizontal_input = -knockdown_velocity;
+			} else if (pc.current_direction == Direction.NORTH) {
+				vertical_input = -knockdown_velocity;
+			} else if (pc.current_direction == Direction.SOUTH) {
+				vertical_input = knockdown_velocity;
+			}
+		} else {
+			ConcludeState ();
+		}
+		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (horizontal_input, vertical_input, 0) 
+			* pc.walking_volocity * time_delta_fraction;
 	}
 
 }
