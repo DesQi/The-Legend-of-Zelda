@@ -32,7 +32,13 @@ public class CameraMovement : MonoBehaviour {
 				curr_cam_pos = new_cam_pos;
 			}
 		} else if (cam_direction == "RIGHT") {
-		
+			if (curr_cam_pos.x < new_cam_pos.x) {
+				curr_cam_pos.x += camera_speed;
+				Camera.main.transform.position = curr_cam_pos;
+			} else {
+				Camera.main.transform.position = new_cam_pos;
+				curr_cam_pos = new_cam_pos;
+			}
 		}
 	}	
 
@@ -42,6 +48,9 @@ public class CameraMovement : MonoBehaviour {
 				// Link face to West, Camera Move Left
 				cam_direction = "LEFT";
 				new_cam_pos.x = curr_cam_pos.x - 16.0f;
+			} else if (PlayerControl.instance.current_direction == Direction.EAST) {
+				cam_direction = "RIGHT";
+				new_cam_pos.x = curr_cam_pos.x + 16.0f;
 			}
 		}
 	}
