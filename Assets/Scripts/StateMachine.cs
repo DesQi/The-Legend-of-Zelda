@@ -262,19 +262,26 @@ public class StateLinkTriggerDoor : State {
 		this.pc = pc;
 	}
 	public override void OnStart () {
-		Debug.Log ("heihei");
 //		state_machine.ChangeState (new StateLinkNormalMovement (pc));
 //		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
 	}
 		
 	public override void OnUpdate(float time_delta_fraction) {
-		Debug.Log ("time time");
 		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
 		cooldown -= time_delta_fraction;
 		if (cooldown <= 0) {
 			Vector3 pos = pc.transform.position;
 			if (pc.current_direction == Direction.WEST) {
-				pos.x -= 1.7f;
+				pos.x -= 1.9f;
+				pc.transform.position = pos;
+			} else if (pc.current_direction == Direction.EAST) {
+				pos.x += 1.9f;
+				pc.transform.position = pos;
+			} else if (pc.current_direction == Direction.NORTH) {
+				pos.y += 1.5f;
+				pc.transform.position = pos;
+			} else if (pc.current_direction == Direction.SOUTH) {
+				pos.y -= 1.5f;
 				pc.transform.position = pos;
 			}
 			ConcludeState ();
