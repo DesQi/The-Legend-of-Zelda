@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 // State Machines are responsible for processing states, notifying them when they're about to begin or conclude, etc.
 public class StateMachine
@@ -253,15 +254,34 @@ public class StateLinkAttack: State {
 }
 
 // When CameraMove, Player does not move
-//public class KeepLinkPositionWhenCameraMove : State {
-//	PlayerControl pc;
-//	public KeepLinkPositionWhenCameraMove(PlayerControl pc) {
-//		this.pc = pc;
-//	}
-//	public override void OnStart () {
+public class StateLinkTriggerDoor : State {
+	PlayerControl pc;
+
+	float cooldown = 50.0f;
+	public StateLinkTriggerDoor(PlayerControl pc) {
+		this.pc = pc;
+	}
+	public override void OnStart () {
+		Debug.Log ("heihei");
+//		state_machine.ChangeState (new StateLinkNormalMovement (pc));
 //		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
-//	}
-//}
+	}
+		
+	public override void OnUpdate(float time_delta_fraction) {
+		Debug.Log ("time time");
+		pc.GetComponent<Rigidbody> ().velocity = new Vector3 (0.0f, 0.0f, 0.0f);
+		cooldown -= time_delta_fraction;
+		if (cooldown <= 0) {
+			Vector3 pos = pc.transform.position;
+			if (pc.current_direction == Direction.WEST) {
+				pos.x -= 1.7f;
+				pc.transform.position = pos;
+			}
+			ConcludeState ();
+		}
+	}
+
+}
 
 // Additional recommended states:
 // StateDeath

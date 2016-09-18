@@ -58,6 +58,9 @@ public class PlayerControl : MonoBehaviour {
 			rupee_count++;
 		} else if (coll.gameObject.tag == "Heart") {
 			// haha
-		}
+		} else if (coll.gameObject.tag == "Door") {
+			// haha
+			control_state_machine.ChangeState (new StateLinkTriggerDoor (this));
+		} 
 	}
 }

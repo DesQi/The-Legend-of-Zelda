@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Rupee
   - Link
+  - Door
   layers:
   - Default
   - TransparentFX
