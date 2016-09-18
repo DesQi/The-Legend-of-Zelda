@@ -7,7 +7,13 @@ public enum EntityState {NORMAL, ATTACKING};
 public class PlayerControl : MonoBehaviour {
 
 	public float walking_volocity = 1.0f;
+
+	//HUD
+	public int max_heart = 6;
 	public int rupee_count = 0;
+	public int key_count = 0;
+	public int heart_count = 4;
+	public int bomb_count = 0;
 
 	public static PlayerControl instance;
 
@@ -59,7 +65,19 @@ public class PlayerControl : MonoBehaviour {
 			Destroy (coll.gameObject);
 			rupee_count++;
 		} else if (coll.gameObject.tag == "Heart") {
-			// haha
+			Destroy (coll.gameObject);
+			if (heart_count < max_heart)
+				heart_count++;
+			Destroy (coll.gameObject);
+		} else if (coll.gameObject.tag == "Key") {
+			Destroy (coll.gameObject);
+			key_count++;
+		} else if (coll.gameObject.tag == "Bomb") {
+			Destroy (coll.gameObject);
+			bomb_count++;
+		} else if (coll.gameObject.tag == "Key") {
+			Destroy (coll.gameObject);
+			key_count++;
 		} else if (coll.gameObject.tag == "Door") {
 			// haha
 			control_state_machine.ChangeState (new StateLinkTriggerDoor (this));

@@ -8,6 +8,8 @@ TagManager:
   - Link
   - Door
   - Key
+  - Heart
+  - Bomb
   layers:
   - Default
   - TransparentFX
