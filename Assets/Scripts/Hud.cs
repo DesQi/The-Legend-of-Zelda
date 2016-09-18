@@ -6,6 +6,8 @@ public class Hud : MonoBehaviour {
 
 	// Rupee_text
 	public Text rupee_text;
+	// Key_text
+	public Text key_text;
 
 	// Use this for initialization
 	void Start () {
