@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 
@@ -196,9 +197,6 @@ public class StateLinkNormalMovement: State {
 
 		} else if (horizontal_input < 0.0f) {
 			double pos_delta = pos.y - Math.Truncate (pos.y);
-			Debug.Log (pos.y);
-			Debug.Log (pos_delta);
-			Debug.Log (y_offset);
 			if (pc.current_direction == Direction.NORTH || pc.current_direction == Direction.SOUTH) {
 				if (pos_delta >= 0.50f && pos_delta < 0.75f || pos_delta >= 0.0f && pos_delta < 0.25f) {
 					pos.y -= y_offset;
@@ -339,10 +337,24 @@ public class StateLinkDamaged : State {
 
 	public int knockdown_times = 10;
 	public float knockdown_velocity = 1.3f;
+	public string enemy_name;
 
-	public StateLinkDamaged(PlayerControl pc) {
+	public StateLinkDamaged(PlayerControl pc, string enemy_name) {
 		this.pc = pc;
+		this.enemy_name = enemy_name;
 	}
+
+	public override void OnStart()
+	{
+		pc.current_state = EntityState.DAMAGED;
+		if (enemy_name == "Stalfos") {
+			pc.heart_count -= 1;
+		}
+		if (pc.heart_count <= 0) {
+			state_machine.ChangeState (new StateLinkDeath (pc));
+		}
+	}
+
 
 	public override void OnUpdate(float time_delta_fraction) {
 		float horizontal_input =  0.0f;
@@ -365,7 +377,27 @@ public class StateLinkDamaged : State {
 			* pc.walking_volocity * time_delta_fraction;
 	}
 
+	public override void OnFinish(){
+		pc.current_state = EntityState.NORMAL;
+	}
+
 }
+
+
+// When CameraMove, Player does not move
+public class StateLinkDeath : State {
+	PlayerControl pc;
+
+	public StateLinkDeath(PlayerControl pc) {
+		this.pc = pc;
+	}
+
+	public override void OnStart()
+	{
+		SceneManager.LoadScene ("Dungeon");  
+	}
+}
+
 
 // Additional recommended states:
 // StateDeath

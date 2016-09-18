@@ -2,7 +2,7 @@
 using System.Collections;
 
 public enum Direction {NORTH, EAST, SOUTH, WEST};
-public enum EntityState {NORMAL, ATTACKING};
+public enum EntityState {NORMAL, ATTACKING, DAMAGED};
 
 public class PlayerControl : MonoBehaviour {
 
@@ -62,9 +62,12 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnTriggerEnter(Collider coll) {
 		// If trigger with enemy
-		if (coll.gameObject.tag == "Stalfos") {
-			Debug.Log ("stalfos");
-			control_state_machine.ChangeState (new StateLinkDamaged (this));
+		if (current_state != EntityState.DAMAGED) {
+			if (coll.gameObject.tag == "Stalfos") {
+				Debug.Log ("stalfos");
+				control_state_machine.ChangeState (new StateLinkDamaged (this, "Stalfos"));
+			}
+
 		}
 
 		if (coll.gameObject.tag == "Rupee") {
