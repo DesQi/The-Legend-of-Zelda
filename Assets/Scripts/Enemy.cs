@@ -44,10 +44,14 @@ public class Enemy : MonoBehaviour {
 			current_state = EntityState.DAMAGED;
 			enemy_health -= damage;
 			if (enemy_health <= 0) {
-				generateItem ();
+				DropPickUps ();
 				// TODO: destroy the enemy
 			} else {
-				
+				if (current_direction == Direction.NORTH || current_direction == Direction.SOUTH) {
+					
+				} else if (current_direction == Direction.EAST || current_direction == Direction.WEST) {
+
+				} 
 			}
 		}
 	}
@@ -57,8 +61,8 @@ public class Enemy : MonoBehaviour {
 		
 	}
 
-	// Generate ruppe, heart, key, etc
-	public void generateItem() {
+	// Drop ruppe, heart, key, etc
+	public void DropPickUps() {
 	
 	}
 }
