@@ -351,7 +351,7 @@ public class StateLinkDamaged : State {
 			pc.heart_count -= 1;
 		}
 		if (pc.heart_count <= 0) {
-			state_machine.ChangeState (new StateLinkDeath (pc));
+			state_machine.ChangeState (new StateLinkDeath ());
 		}
 	}
 
@@ -386,10 +386,8 @@ public class StateLinkDamaged : State {
 
 // When CameraMove, Player does not move
 public class StateLinkDeath : State {
-	PlayerControl pc;
 
-	public StateLinkDeath(PlayerControl pc) {
-		this.pc = pc;
+	public StateLinkDeath() {
 	}
 
 	public override void OnStart()
