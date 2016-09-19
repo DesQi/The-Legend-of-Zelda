@@ -196,9 +196,6 @@ public class StateLinkNormalMovement: State {
 
 		} else if (horizontal_input < 0.0f) {
 			double pos_delta = pos.y - Math.Truncate (pos.y);
-			Debug.Log (pos.y);
-			Debug.Log (pos_delta);
-			Debug.Log (y_offset);
 			if (pc.current_direction == Direction.NORTH || pc.current_direction == Direction.SOUTH) {
 				if (pos_delta >= 0.50f && pos_delta < 0.75f || pos_delta >= 0.0f && pos_delta < 0.25f) {
 					pos.y -= y_offset;
