@@ -88,9 +88,17 @@ public class PlayerControl : MonoBehaviour {
 			Destroy (coll.gameObject);
 			key_count++;
 		} else if (coll.gameObject.tag == "Door") {
-			// haha
 			control_state_machine.ChangeState (new StateLinkTriggerDoor (this));
-		} 
+		}
+	}
+
+	void OnCollisionEnter(Collision  coll) {
+		if (coll.gameObject.tag == "Lock") {
+			if (key_count > 0) {
+				key_count--;
+				Destroy (coll.gameObject);
+			}
+		}
 	}
 		
 }
