@@ -11,6 +11,10 @@ TagManager:
   - Heart
   - Bomb
   - Stalfos
+  - Lock
+  - Hole
+  - MoveableBlock1
+  - MoveableBlock2
   layers:
   - Default
   - TransparentFX
