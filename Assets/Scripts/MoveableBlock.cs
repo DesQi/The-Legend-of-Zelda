@@ -17,6 +17,7 @@ public class MoveableBlock : MonoBehaviour {
 	public Vector3 collisionCameraPosition;
 	public Vector3 currCameraPosition;
 
+
 	// Use this for initialization
 	void Start () {
 		blockPosition = transform.position;
@@ -65,7 +66,8 @@ public class MoveableBlock : MonoBehaviour {
 					this.transform.position = newPosition;
 					hasNotBeenMoved = false;
 					startToMove = false;
-
+					if (OldManRoomLock.instance) 
+						Destroy (OldManRoomLock.instance.gameObject);
 				}
 			} else if (moveDirection == Direction.NORTH) {
 				if (currPosition.y < newPosition.y) {

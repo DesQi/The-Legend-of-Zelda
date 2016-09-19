@@ -15,6 +15,7 @@ TagManager:
   - Hole
   - MoveableBlock1
   - MoveableBlock2
+  - OldManRoomLock
   layers:
   - Default
   - TransparentFX
