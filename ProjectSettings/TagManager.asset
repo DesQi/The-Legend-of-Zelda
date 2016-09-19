@@ -16,6 +16,8 @@ TagManager:
   - MoveableBlock1
   - MoveableBlock2
   - OldManRoomLock
+  - MoveableBlock
+  - Weapon_Sword
   layers:
   - Default
   - TransparentFX

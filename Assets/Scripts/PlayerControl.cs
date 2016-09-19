@@ -64,7 +64,6 @@ public class PlayerControl : MonoBehaviour {
 		// If trigger with enemy
 		if (current_state != EntityState.DAMAGED) {
 			if (coll.gameObject.tag == "Stalfos") {
-				Debug.Log ("stalfos");
 				control_state_machine.ChangeState (new StateLinkDamaged (this, "Stalfos"));
 			}
 
