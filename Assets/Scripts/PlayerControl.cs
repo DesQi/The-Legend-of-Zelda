@@ -62,7 +62,12 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnTriggerEnter(Collider coll) {
 		// If trigger with enemy
+		if (current_state != EntityState.DAMAGED) {
+			if (coll.gameObject.tag == "Stalfos") {
+				control_state_machine.ChangeState (new StateLinkDamaged (this, "Stalfos"));
+			}
 
+		}
 
 		if (coll.gameObject.tag == "Rupee") {
 			Destroy (coll.gameObject);
@@ -93,7 +98,7 @@ public class PlayerControl : MonoBehaviour {
 			}
 
 		}
-		else if (coll.gameObject.tag == "Lock") {
+		if (coll.gameObject.tag == "Lock") {
 			if (key_count > 0) {
 				key_count--;
 				Destroy (coll.gameObject);

@@ -19,6 +19,7 @@ TagManager:
   - MoveableBlock
   - Weapon_Sword
   - Block
+  - Room
   layers:
   - Default
   - TransparentFX

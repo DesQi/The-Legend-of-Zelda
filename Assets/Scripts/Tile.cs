@@ -65,21 +65,29 @@ public class Tile : MonoBehaviour {
         bc.enabled = true;
         char c = ShowMapOnCamera.S.collisionS[tileNum];
         switch (c) {
-        case 'S': // Solid
-            bc.center = Vector3.zero;
+		case 'S': // Solid
+			bc.center = Vector3.zero;
 			bc.size = Vector3.one;
 			tag = "Block";
+			bc.isTrigger = false;
             break;
 		case 'P': // Pushable?
 			break;
 		case 'W': // ThroughWall, Up,Down,Right,Left: 91,10,49,50
 			bc.center = Vector3.zero;
 			bc.center = Vector3.one;
-//			tag = "Block";
 			bc.enabled = false;
 			break;
-        default:
-            bc.enabled = false;
+		case 'F': //floor
+			bc.enabled = false;
+			break;
+		case 'H': // Hole
+			bc.isTrigger = true;
+			tag = "Block";
+			break;
+		default:
+			bc.enabled = false;
+			tag = "Block";
             break;
         }
 	}	

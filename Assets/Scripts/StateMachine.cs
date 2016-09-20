@@ -144,7 +144,6 @@ public class StatePlayAnimationForHeldKey : State
 		// Modulus is necessary so we don't overshoot the length of the animation.
 		int current_frame_index = ((int)((Time.time - animation_start_time) / (1.0 / fps)) % animation_length);
 		renderer.sprite = animation[current_frame_index];
-		Debug.Log ((Time.time - animation_start_time) / (1.0 / fps));
 		
 		// If another key is pressed, we need to transition to a different walking animation.
 		if(Input.GetKeyDown(KeyCode.DownArrow))
