@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Enemy : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class Enemy : MonoBehaviour {
 	public Direction current_direction = Direction.SOUTH;
 	public Direction knockback_direction = Direction.OTHER;
 
+	public GameObject[] prefabPickUps;
+	public float pickUpDropChance = 0.5f;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -32,9 +36,10 @@ public class Enemy : MonoBehaviour {
 			knockback_direction = Direction.OTHER;
 			current_state = EntityState.NORMAL;
 			damaged_times--;
-		} else {
-			Move ();
-		}
+		} 
+//		else {
+//			Move ();
+//		}
 	}
 
 	// Trigger with weapons
@@ -52,10 +57,18 @@ public class Enemy : MonoBehaviour {
 		} else if (coll.gameObject.tag == "Bow") {
 			Direction weapon_direction = coll.GetComponent<Weapon> ().weapon_direction;
 			EnemyDmaged (bow_damage, weapon_direction);
-		} else {
+		}  else {
 			Debug.Log ("trigger other");
 		}
 		// TODO: other collision
+	}
+
+	void OnCollisionEnter(Collision  coll) {
+		if (coll.gameObject.tag == "Block") {
+			Debug.Log ("trigger block");
+			GridBasedMove ();
+			ChooseDirectionMove ();
+		}
 	}
 
 	// Cause damage to the enemy, and change the movement
@@ -109,6 +122,58 @@ public class Enemy : MonoBehaviour {
 
 	// Drop ruppe, heart, key, etc
 	public void DropPickUps() {
-	
+		// Potentially generate a PowerUp
+//		if (UnityEngine.Random.value <= pickUpDropChance) {
+//			int ndx = UnityEngine.Random.Range(0,prefabPickUps.Length); 
+//			Instantiate( prefabPickUps[ndx], transform.position, Quaternion.identity ); 
+//		}
+	}
+
+	// Enemy must move in grid
+	// Link can move in the middle of two grids, but enemies can't
+	// So enemy movement is % 1.0f but link is % 0.5f
+	public void GridBasedMove() {
+		Vector3 pos = transform.position;
+		float x_offset = pos.x % 1.0f;
+		double pos_x_delta = pos.x - Math.Truncate (pos.x);
+		if (pos_x_delta <= 0.5f) {
+			pos.x -= x_offset;
+		} else {
+			pos.x -= (1.0f - x_offset);
+		}
+		float y_offset = pos.y % 1.0f;
+		double pos_y_delta = pos.y - Math.Truncate (pos.y);
+		if (pos_y_delta <= 0.5f) {
+			pos.y -= y_offset;
+		} else {
+			pos.y -= (1.0f - y_offset);
+		}
+		transform.position = pos;
+	}
+
+	// Some enemies may change their directions randomly
+	public void ChooseDirectionMove() {
+		Direction new_direction = current_direction;
+		while (new_direction == current_direction) {
+			float random_value = UnityEngine.Random.value;
+			if (random_value < 0.25f) {
+				new_direction = Direction.NORTH;
+				this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 1, 0)
+				* walking_velocity;
+			} else if (random_value < 0.50f) {
+				new_direction = Direction.SOUTH;
+				this.GetComponent<Rigidbody> ().velocity = new Vector3 (0, -1, 0)
+				* walking_velocity;
+			} else if (random_value < 0.75f) {
+				new_direction = Direction.EAST;
+				this.GetComponent<Rigidbody> ().velocity = new Vector3 (1, 0, 0)
+				* walking_velocity;
+			} else {
+				new_direction = Direction.WEST;
+				this.GetComponent<Rigidbody> ().velocity = new Vector3 (-1, 0, 0)
+				* walking_velocity;
+			} 
+		}
+		current_direction = new_direction;
 	}
 }

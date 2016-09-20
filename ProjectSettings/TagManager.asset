@@ -18,6 +18,7 @@ TagManager:
   - OldManRoomLock
   - MoveableBlock
   - Weapon_Sword
+  - Block
   layers:
   - Default
   - TransparentFX
