@@ -12,7 +12,6 @@ public class EnemyStalfos : Enemy {
 		knockback_velocity = 8.0f;
 		enemy_health = 3;
 		GridBasedMove ();
-		GridBasedMove (false);
 		ChooseDirectionMove ();
 	}
 
