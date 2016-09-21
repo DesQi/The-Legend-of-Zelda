@@ -24,7 +24,6 @@ public class OldManRoomSpeech : MonoBehaviour {
 			if (counter == 0)
 				counter = 8;
 			if (counter == 8 && textArr.Length > idxOfText) {
-				print (textArr [idxOfText]);
 				if (idxOfText == 19) {
 					this.GetComponent<TextMesh> ().text += "\n          "; 
 				}

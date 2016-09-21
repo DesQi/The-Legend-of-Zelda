@@ -70,24 +70,27 @@ public class Tile : MonoBehaviour {
 			bc.size = Vector3.one;
 			tag = "Block";
 			bc.isTrigger = false;
+			GetComponent<SpriteRenderer> ().sortingOrder = -1;
             break;
-		case 'P': // Pushable?
-			break;
 		case 'W': // ThroughWall, Up,Down,Right,Left: 91,10,49,50
 			bc.center = Vector3.zero;
 			bc.center = Vector3.one;
 			bc.enabled = false;
+			GetComponent<SpriteRenderer> ().sortingOrder = -1;
 			break;
 		case 'F': //floor
 			bc.enabled = false;
+			GetComponent<SpriteRenderer> ().sortingOrder = -1;
 			break;
 		case 'H': // Hole
 			bc.isTrigger = true;
 			tag = "Block";
+			GetComponent<SpriteRenderer> ().sortingOrder = -1;
 			break;
 		default:
 			bc.enabled = false;
 			tag = "Block";
+			GetComponent<SpriteRenderer> ().sortingOrder = -1;
             break;
         }
 	}	
