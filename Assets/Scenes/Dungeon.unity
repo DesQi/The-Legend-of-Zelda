@@ -2624,6 +2624,7 @@ GameObject:
   - 4: {fileID: 522590660}
   - 65: {fileID: 522590659}
   - 114: {fileID: 522590658}
+  - 114: {fileID: 522590661}
   m_Layer: 0
   m_Name: RightLeftDoor_10
   m_TagString: Door
@@ -2675,6 +2676,17 @@ Transform:
   - {fileID: 377893855}
   m_Father: {fileID: 0}
   m_RootOrder: 15
+--- !u!114 &522590661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 522590657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb22b24d6972401bb7ec0f99a36a27f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &528233709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,7 +2898,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 578876360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -4829,7 +4841,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1068115679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -8041,7 +8053,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1877242334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -8973,6 +8985,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2103012147}
+  - 65: {fileID: 2103012148}
   m_Layer: 0
   m_Name: OldManRoom
   m_TagString: Untagged
@@ -8997,6 +9010,18 @@ Transform:
   - {fileID: 2116233847}
   m_Father: {fileID: 0}
   m_RootOrder: 40
+--- !u!65 &2103012148
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103012146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2103947095
 GameObject:
   m_ObjectHideFlags: 0
@@ -9069,8 +9094,9 @@ GameObject:
   - 4: {fileID: 2116233847}
   - 23: {fileID: 2116233849}
   - 102: {fileID: 2116233848}
+  - 114: {fileID: 2116233850}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: SpeechText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9083,8 +9109,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2116233846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2103012147}
@@ -9096,7 +9122,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2116233846}
-  m_Text: "EASTMOST PENNINSULA\n           IS THE SECRET"
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -9139,3 +9165,51 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &2116233850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116233846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b93ee0dce5d94ad38056107febc45d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speechTrigger: 0
+  textArr:
+  - E
+  - A
+  - S
+  - T
+  - M
+  - O
+  - S
+  - T
+  - ' '
+  - P
+  - E
+  - N
+  - N
+  - I
+  - N
+  - S
+  - U
+  - L
+  - A
+  - I
+  - S
+  - ' '
+  - T
+  - H
+  - E
+  - ' '
+  - S
+  - E
+  - C
+  - R
+  - E
+  - T
+  idxOfText: 0
+  OldManRoomCameraPos: {x: 7.51, y: 39.41, z: -10}
+  counter: 10

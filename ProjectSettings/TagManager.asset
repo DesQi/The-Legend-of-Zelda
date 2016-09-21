@@ -20,6 +20,7 @@ TagManager:
   - Weapon_Sword
   - Block
   - Room
+  - SpeechTrigger
   layers:
   - Default
   - TransparentFX
